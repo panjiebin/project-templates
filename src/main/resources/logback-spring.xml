@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<springProperty  name="LOG_HOME" source="log.path" defaultValue="/data/log"/>
+	<property name="logPattern" value="[%5p][%d{yyyy-MM-dd HH:mm:ss}] %c - %m%n"/>
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+	<appender name="file-info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/demo-info.log</File>
+		<append>true</append>
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/demo-info.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="file-error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<File>${LOG_HOME}/demo-error.log</File>
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/demo-error.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="file-warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<File>${LOG_HOME}/demo-warn.log</File>
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/demo-warn.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+	<springProfile name="prod,it,qa">
+        <root level="info">
+			<appender-ref ref="file-error" />
+			<appender-ref ref="file-warn" />
+			<appender-ref ref="file-info" />
+		</root>
+    </springProfile>
+    <springProfile name="dev">
+        <root level="info">
+			<appender-ref ref="stdout" />
+		</root>
+    </springProfile>
+
+</configuration>

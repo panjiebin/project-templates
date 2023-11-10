@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+
+spring:
+  profiles:
+    active: @profiles.active@
+  mvc:
+    throw-exception-if-no-handler-found: true
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+log:
+  path: /data/log
