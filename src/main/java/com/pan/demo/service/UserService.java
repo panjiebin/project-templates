@@ -6,12 +6,13 @@ import com.pan.demo.dto.UserDto;
 import com.pan.demo.dto.UserQueryDto;
 import com.pan.demo.entity.User;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author panjb
  */
-public interface UserService extends IService<User> {
+public interface UserService extends IService<User>, Serializable {
 
     UserDto queryByUserId(String id);
 

@@ -7,7 +7,7 @@ spring:
 # 打印sql到控制台
 logging:
   level:
-    com.pan.demo.mapper: deg
+    com.pan.demo.mapper: debug
 mybatis-plus:
   type-aliases-package: com.pan.demo.entity
   configuration:

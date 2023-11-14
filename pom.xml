@@ -23,6 +23,7 @@
         <mysql.version>8.0.33</mysql.version>
         <powermock.version>2.0.2</powermock.version>
         <mybatis-plus-starter.version>3.5.4</mybatis-plus-starter.version>
+        <druid-starter.version>1.2.20</druid-starter.version>
     </properties>
 
     <dependencies>
@@ -39,6 +40,20 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-starter.version}</version>
         </dependency>
 
         <!-- test -->
@@ -80,6 +95,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>*.yml</include>
+                    <include>*.properties</include>
                     <include>application-${profiles.active}.yml</include>
                     <include>*.xml</include>
                 </includes>
